@@ -30,7 +30,7 @@ jobs:
 
       # Publish the Blazor project
       - name: "Publish Blazor WASM Project"
-        run: dotnet publish ./Web/Web.csproj -c Release -o dist/Web
+        run: dotnet publish ./Src/X3Code.Tools/X3Code.Tools.csproj -c Release -o dist/Web
 
       # Deploy to GitHub Pages
       - name: "Deploy to GitHub Pages"

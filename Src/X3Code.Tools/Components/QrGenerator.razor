@@ -1,11 +1,25 @@
-<div>
-    <input type="text" maxlength="250" value="@InputText" placeholder="Enter up to 250 characters" @oninput="OnInputChange" @onkeyup="CheckEnter"/>
-    <button @onclick="() => CreateQrCode(InputText)" disabled="@(string.IsNullOrWhiteSpace(InputText))">Send</button>
-</div>
-
-@if (!string.IsNullOrEmpty(QrCodeAsBase64))
-{
-    <div>
-        <img src="data:image/png;base64,@QrCodeAsBase64" alt="Generated QR Code"/>
-    </div>
-}
+<MudGrid Class="pr-2">
+    <MudItem md="6">
+        <MudStack>
+            <MudStack Row="true">
+                <MudTextField T="string"
+                              @bind-Value="InputText"
+                              Variant="Variant.Filled"
+                              MaxLength="2500"
+                              Placeholder="@InputPlaceHolder"
+                              FullWidth="true"
+                              Immediate="true"
+                              @onkeyup="CheckEnter"/>
+                <MudButton OnClick="() => CreateQrCode(InputText)" Disabled="@(string.IsNullOrWhiteSpace(InputText))" StartIcon="@Icons.Material.Filled.Send">Send</MudButton>
+                <MudButton OnClick="Clear" StartIcon="@Icons.Material.Filled.Clear"></MudButton>
+            </MudStack>
+        </MudStack>
+    </MudItem>
+    <MudItem md="6">
+        @if (!string.IsNullOrEmpty(QrCodeAsBase64))
+        {
+            var base64 = $"data:image/png;base64,{QrCodeAsBase64}";
+            <MudImage ObjectFit="ObjectFit.Contain" Fluid="true" Src="@base64" Alt="Generated QR-Code" Class="rounded-lg"/>
+        }
+    </MudItem>
+</MudGrid>

@@ -1,5 +1,11 @@
-<h3>QrGenerator</h3>
+<div>
+    <input type="text" maxlength="250" @bind="InputText" placeholder="Enter up to 250 characters"/>
+    <button @onclick="() => CreateQrCode(InputText)">Send</button>
+</div>
 
-@code {
-    
+@if (!string.IsNullOrEmpty(QrCodeAsBase64))
+{
+    <div>
+        <img src="data:image/png;base64,@QrCodeAsBase64" alt="Generated QR Code"/>
+    </div>
 }

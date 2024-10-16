@@ -1,6 +1,6 @@
 <div>
-    <input type="text" maxlength="250" @bind="InputText" placeholder="Enter up to 250 characters"/>
-    <button @onclick="() => CreateQrCode(InputText)">Send</button>
+    <input type="text" maxlength="250" value="@InputText" placeholder="Enter up to 250 characters" @oninput="OnInputChange" @onkeyup="CheckEnter"/>
+    <button @onclick="() => CreateQrCode(InputText)" disabled="@(string.IsNullOrWhiteSpace(InputText))">Send</button>
 </div>
 
 @if (!string.IsNullOrEmpty(QrCodeAsBase64))

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using QRCoder;
 
 namespace X3Code.Tools.Components;
@@ -17,5 +18,19 @@ public partial class QrGenerator : ComponentBase
         var qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
         var qrCode = new Base64QRCode(qrCodeData);
         QrCodeAsBase64 = qrCode.GetGraphic(20);
+    }
+    
+    private void CheckEnter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(InputText))
+        {
+            CreateQrCode(InputText);
+        }
+    }
+
+    private void OnInputChange(ChangeEventArgs e)
+    {
+        if (e.Value != null)
+            InputText = e.Value.ToString();
     }
 }
